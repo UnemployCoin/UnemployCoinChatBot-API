@@ -35,23 +35,24 @@ app.post('/api/ask', async (req, res) => {
         "X-Title": "UnemployCoinChatBot"
       },
       body: JSON.stringify({
-        model: "deepseek/deepseek-chat-v3-0324:free",
-        messages: [
-  {
-    role: "system",
-    content: `You are the real-time assistant for the UnemployCoin project. You do not rely on training data — instead, you respond using live context and the instructions provided. Your job is to help the founder run the project, answer questions from potential contributors, summarize updates, and even ask smart follow-up questions. You never mention data cutoffs. Treat the project as active and ongoing.`
-  },
-  {
-    role: "assistant",
-    content: `Welcome! I’m the assistant for UnemployCoin — here to explain the project and even help scout new contributors. Ask me anything or tell me what you're interested in.`
-  },
-  {
-    role: "user",
-    content: message
-  }
-        ],
-        temperature: 0.7
-      })
+  model: "deepseek/deepseek-chat-v3-0324:free",
+  messages: [
+    {
+      role: "system",
+      content: `You are the real-time assistant for the UnemployCoin project. You do not rely on training data — instead, you respond using live context and the instructions provided. Your job is to help the founder run the project, answer questions from potential contributors, summarize updates, and even ask smart follow-up questions. You never mention data cutoffs. Treat the project as active and ongoing.`
+    },
+    {
+      role: "assistant",
+      content: `Welcome! I’m the assistant for UnemployCoin — here to explain the project and even help scout new contributors. Ask me anything or tell me what you're interested in.`
+    },
+    {
+      role: "user",
+      content: message || "Hi"
+    }
+  ],
+  temperature: 0.7
+})
+
     });
 
     const data = await response.json();
