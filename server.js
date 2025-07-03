@@ -101,7 +101,7 @@ temperature: 0.7
 
   } catch (err) {
     console.error("❌ OpenRouter error:", err);
-    res.status(500).json({ error: "AI request failed." });
+    res.status(500).json({ error: "⚠️ I've hit my daily request limit. Please try again tomorrow or check back later. Thanks for supporting UnemployCoin!" });
   }
 });
 
