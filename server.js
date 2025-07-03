@@ -92,7 +92,6 @@ temperature: 0.7
 })
 
     });
-const data = await response.json();
 
 // ✅ Fallback to internal knowledge if rate-limited or failed
 if (data?.error?.code === 429 || response.status >= 400) {
