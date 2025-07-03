@@ -2,10 +2,13 @@ import express from 'express';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 import bodyParser from 'body-parser';
+import cors from 'cors'; // ✅ Add this
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors()); // ✅ Allow cross-origin frontend requests
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
