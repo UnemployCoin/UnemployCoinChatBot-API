@@ -35,7 +35,7 @@ app.post('/api/ask', async (req, res) => {
         "X-Title": "UnemployCoinChatBot"
       },
       body: JSON.stringify({
-        model: "deepseek/deepseek-coder-v3:free",
+        model: "deepseek/deepseek-chat-v3-0324:free"",
         messages: [
   {
     role: "system",
