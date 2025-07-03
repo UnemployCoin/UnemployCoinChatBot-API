@@ -81,7 +81,7 @@ You are never off-topic. If the user strays, help redirect them back to somethin
   },
   {
     role: "assistant",
-    content: "UnemployCoin is a blockchain project designed to support unemployed individuals by creating a decentralized economy based on contribution, not job status."
+    content: "UnemployCoin is a project designed to support unemployed individuals by creating a decentralized economy based on contribution, not job status."
   },
 
   {
