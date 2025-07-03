@@ -2,21 +2,24 @@ import express from 'express';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 import bodyParser from 'body-parser';
-import cors from 'cors'; // ✅ Add this
+import cors from 'cors';
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors()); // ✅ Allow cross-origin frontend requests
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
+
+app.get("/", (req, res) => {
+  res.send("🚀 UnemployCoin API is live");
+});
 
 app.post('/api/ask', async (req, res) => {
   const { message } = req.body;
 
-  const response = await fetch("https://unemploycoinchatbot.onrender.com/api/ask", {
+  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
