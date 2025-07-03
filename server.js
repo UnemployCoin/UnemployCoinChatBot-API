@@ -119,18 +119,10 @@ if (data?.error?.code === 429 || response.status >= 400) {
   });
 }
 
-    const data = await response.json();
-    console.log("✅ OpenRouter API response:", JSON.stringify(data, null, 2));
-    res.send(data);
+// ✅ Only send real data if it passed the checks
+res.send(data);
 
-    console.log("🌐 Status:", response.status, response.ok);
-
-  } catch (err) {
-    console.error("❌ OpenRouter error:", err);
-    res.status(500).json({ error: "⚠️ I've hit my daily request limit. Please try again tomorrow or check back later. Thanks for supporting UnemployCoin!" });
-  }
-});
-
-app.listen(port, () => {
-  console.log(`✅ Server running at http://localhost:${port}`);
-});
+} catch (err) {
+  console.error("❌ OpenRouter error:", err);
+  res.status(500).json({ error: "⚠️ I'm temporarily unavailable. Please try again later." });
+}
