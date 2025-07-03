@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 app.post('/api/ask', async (req, res) => {
   try {
     const { message } = req.body;
-
+  
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -92,6 +92,33 @@ temperature: 0.7
 })
 
     });
+const data = await response.json();
+
+// ✅ Fallback to internal knowledge if rate-limited or failed
+if (data?.error?.code === 429 || response.status >= 400) {
+  const userInput = message.toLowerCase();
+
+  const localKnowledge = {
+    "what is unemploycoin": "UnemployCoin is a crypto project designed to support unemployed individuals through blockchain-based incentives and a decentralized community.",
+    "total supply": "The total supply of UnemployCoin is 1,000,000,000 UNEMP tokens.",
+    "roadmap": "The roadmap includes: Phase 1 – Launch, Phase 2 – Wallet & Mining Client, Phase 3 – DAO Governance, Phase 4 – Ecosystem Expansion.",
+    "how to contribute": "You can contribute by coding, writing, helping with outreach, testing, or joining discussions. Everyone is welcome.",
+    "default": "I’m currently at my request limit, but I can still help! Try asking something like 'What is UnemployCoin?' or 'How can I contribute?'"
+  };
+
+  const matched = Object.keys(localKnowledge).find(key => userInput.includes(key));
+  const reply = matched ? localKnowledge[matched] : localKnowledge["default"];
+
+  return res.send({
+    choices: [
+      {
+        message: {
+          content: reply
+        }
+      }
+    ]
+  });
+}
 
     const data = await response.json();
     console.log("✅ OpenRouter API response:", JSON.stringify(data, null, 2));
