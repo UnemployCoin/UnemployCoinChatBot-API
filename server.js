@@ -45,7 +45,11 @@ app.post('/api/ask', async (req, res) => {
     });
 
     const data = await response.json();
+    console.log("✅ OpenRouter API response:", JSON.stringify(data, null, 2));
     res.send(data);
+
+    console.log("🌐 Status:", response.status, response.ok);
+
   } catch (err) {
     console.error("❌ OpenRouter error:", err);
     res.status(500).json({ error: "AI request failed." });
