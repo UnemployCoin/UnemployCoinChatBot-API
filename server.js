@@ -16,7 +16,7 @@ app.use(express.static('public'));
 app.post('/api/ask', async (req, res) => {
   const { message } = req.body;
 
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+  const response = await fetch("https://unemploycoinchatbot.onrender.com/api/ask", {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
