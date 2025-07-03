@@ -37,8 +37,12 @@ app.post('/api/ask', async (req, res) => {
       body: JSON.stringify({
         model: "mistralai/mistral-small-3.2-24b-instruct:free",
         messages: [
-          { role: "system", content: "You are the official UnemployCoin assistant..." },
-          { role: "user", content: message }
+          {
+          role: "system",
+          content: `You are the official assistant for UnemployCoin — a real cryptocurrency created to support unemployed and underbanked individuals through blockchain technology. Your job is to explain the project's mission, timeline, features, and roadmap clearly and professionally. Avoid saying UnemployCoin is fictional or from TV shows — this is a legitimate community project. Use a confident, concise tone and stay fully aligned with UnemployCoin's actual vision, which includes accessibility, empowerment, transparency, and long-term utility.`
+          },
+          { 
+          role: "user", content: message }
         ],
         temperature: 0.7
       })
