@@ -1,9 +1,11 @@
-require('dotenv').config();
-const express = require('express');
-const fetch = require('node-fetch'); // Use v2.x for CommonJS support
-const bodyParser = require('body-parser');
+import express from 'express';
+import dotenv from 'dotenv';
+import fetch from 'node-fetch';
+import bodyParser from 'body-parser';
+
+dotenv.config();
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -16,7 +18,7 @@ app.post('/api/ask', async (req, res) => {
     headers: {
       "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
       "Content-Type": "application/json",
-      "HTTP-Referer": "https://unemploycoin.com", // Optional but helps rank usage
+      "HTTP-Referer": "https://unemploycoin.com",
       "X-Title": "UnemployCoinChatBot"
     },
     body: JSON.stringify({
