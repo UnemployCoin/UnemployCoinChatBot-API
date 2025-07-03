@@ -91,7 +91,8 @@ app.post('/api/ask', async (req, res) => {
 temperature: 0.7
 })
 
-    });
+});
+    
 const data = await response.json();
 // ✅ Fallback to internal knowledge if rate-limited or failed
 if (data?.error?.code === 429 || response.status >= 400) {
@@ -122,7 +123,13 @@ if (data?.error?.code === 429 || response.status >= 400) {
 // ✅ Only send real data if it passed the checks
 res.send(data);
 
-} catch (err) {
-  console.error("❌ OpenRouter error:", err);
-  res.status(500).json({ error: "⚠️ I'm temporarily unavailable. Please try again later." });
-}
+  } catch (err) {
+    console.error("❌ OpenRouter error:", err);
+    res.status(500).json({ error: "⚠️ I'm temporarily unavailable. Please try again later." });
+  }
+}); // ✅ closes app.post
+
+// ✅ server starts here
+app.listen(port, () => {
+  console.log(`✅ Server running at http://localhost:${port}`);
+});
